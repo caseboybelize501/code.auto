@@ -1,0 +1,16 @@
+fastapi==0.104.1
+uvicorn==0.24.0
+psutil==5.9.5
+subprocess32==3.5.4
+pytest==7.4.3
+jest==29.7.0
+cargo==0.1.0
+npm==9.8.1
+gitpython==3.1.32
+sqlalchemy==2.0.23
+chromadb==0.4.22
+neo4j==5.16.0
+redis==5.0.1
+celery==5.3.4
+requests==2.31.0
+pydantic==2.5.0

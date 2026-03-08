@@ -1,0 +1,118 @@
+{
+  "timestamp": "2026-03-07T20:04:46.363744",
+  "results": {
+    "total": 10,
+    "passed": 8,
+    "failed": 2,
+    "timeouts": 1,
+    "errors": 0,
+    "by_language": {
+      "python": {
+        "total": 5,
+        "passed": 5
+      },
+      "node": {
+        "total": 3,
+        "passed": 3
+      },
+      "bash": {
+        "total": 2,
+        "passed": 0
+      }
+    },
+    "details": [
+      {
+        "test": "python/hello_world",
+        "elapsed_ms": 110.86463928222656,
+        "runtime_ms": 106.99248313903809,
+        "slot_id": 0,
+        "exit_code": 0,
+        "timed_out": false,
+        "status": "PASS"
+      },
+      {
+        "test": "python/math_operations",
+        "elapsed_ms": 106.88304901123047,
+        "runtime_ms": 106.07552528381348,
+        "slot_id": 1,
+        "exit_code": 0,
+        "timed_out": false,
+        "status": "PASS"
+      },
+      {
+        "test": "python/list_comprehension",
+        "elapsed_ms": 107.24639892578125,
+        "runtime_ms": 106.4310073852539,
+        "slot_id": 2,
+        "exit_code": 0,
+        "timed_out": false,
+        "status": "PASS"
+      },
+      {
+        "test": "python/fibonacci",
+        "elapsed_ms": 106.69612884521484,
+        "runtime_ms": 105.63063621520996,
+        "slot_id": 3,
+        "exit_code": 0,
+        "timed_out": false,
+        "status": "PASS"
+      },
+      {
+        "test": "python/timeout_test",
+        "elapsed_ms": 2019.0362930297852,
+        "runtime_ms": 2018.2499885559082,
+        "slot_id": 4,
+        "exit_code": -1,
+        "timed_out": true,
+        "status": "PASS"
+      },
+      {
+        "test": "node/hello_world",
+        "elapsed_ms": 108.27398300170898,
+        "runtime_ms": 107.43474960327148,
+        "slot_id": 5,
+        "exit_code": 0,
+        "timed_out": false,
+        "status": "PASS"
+      },
+      {
+        "test": "node/array_operations",
+        "elapsed_ms": 108.38150978088379,
+        "runtime_ms": 107.06090927124023,
+        "slot_id": 6,
+        "exit_code": 0,
+        "timed_out": false,
+        "status": "PASS"
+      },
+      {
+        "test": "node/promise_test",
+        "elapsed_ms": 144.75750923156738,
+        "runtime_ms": 143.8593864440918,
+        "slot_id": 7,
+        "exit_code": 0,
+        "timed_out": false,
+        "status": "PASS"
+      },
+      {
+        "test": "bash/hello_world",
+        "elapsed_ms": 197.54528999328613,
+        "runtime_ms": 196.8827247619629,
+        "slot_id": 8,
+        "exit_code": 127,
+        "timed_out": false,
+        "status": "FAIL",
+        "reason": "bash: D:UsersCASEAppDataLocalTempsandbox_slot_8srcexec_8_56c7172c.sh: No such file or directory\n"
+      },
+      {
+        "test": "bash/loop_test",
+        "elapsed_ms": 307.62171745300293,
+        "runtime_ms": 306.4999580383301,
+        "slot_id": 9,
+        "exit_code": 127,
+        "timed_out": false,
+        "status": "FAIL",
+        "reason": "bash: D:UsersCASEAppDataLocalTempsandbox_slot_9srcexec_9_44c335e6.sh: No such file or directory\n"
+      }
+    ]
+  }
+}

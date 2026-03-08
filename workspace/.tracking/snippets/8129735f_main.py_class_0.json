@@ -1,0 +1,8 @@
+{
+  "id": "8129735f_main.py_class_0",
+  "type": "class",
+  "content": "class Response(BaseModel):\n    success: bool\n    message: str\n    data: Optional[dict] = None\n\n# Domain models",
+  "source": "main.py",
+  "project_id": "8129735f",
+  "language": "python"
+}

@@ -1,0 +1,218 @@
+{
+  "project_id": "8129735f",
+  "timestamp": "2026-03-08T00:51:02.503148",
+  "plan": {
+    "requirements": "Build an ML inference serving platform with model versioning, A/B testing, canary deployments, request batching, GPU scheduling, auto-scaling, latency monitoring, and cost optimization. Support multip",
+    "architecture": "microservices",
+    "language": "python",
+    "framework": "fastapi",
+    "key_features": [
+      "Model versioning and deployment",
+      "A/B testing capabilities",
+      "Canary deployment support",
+      "Request batching optimization",
+      "GPU scheduling and resource management",
+      "Auto-scaling based on load",
+      "Latency monitoring and alerting",
+      "Cost optimization metrics",
+      "Multi-model format support (ONNX, PyTorch, TensorFlow)",
+      "Rate limiting per API key"
+    ]
+  },
+  "files": [
+    {
+      "path": "main.py",
+      "hash": "cc8892fd9398e4ef",
+      "line_count": 75,
+      "code_lines": 52,
+      "imports": [
+        "fastapi",
+        "pydantic",
+        "typing",
+        "datetime",
+        "uvicorn"
+      ],
+      "classes": [
+        "Response",
+        "Item"
+      ],
+      "functions": [
+        "root",
+        "list_items",
+        "get_item",
+        "create_item",
+        "update_item",
+        "delete_item"
+      ],
+      "language": "python"
+    },
+    {
+      "path": "models.py",
+      "hash": "a0bd73a5bc071415",
+      "line_count": 14,
+      "code_lines": 9,
+      "imports": [
+        "datetime",
+        "typing",
+        "pydantic"
+      ],
+      "classes": [
+        "Item"
+      ],
+      "functions": [],
+      "language": "python"
+    },
+    {
+      "path": "requirements.txt",
+      "hash": "99819f6494d2d5f0",
+      "line_count": 7,
+      "code_lines": 6,
+      "imports": [],
+      "classes": [],
+      "functions": [],
+      "language": "python"
+    },
+    {
+      "path": "config.py",
+      "hash": "b853006de58a1de5",
+      "line_count": 13,
+      "code_lines": 9,
+      "imports": [
+        "typing",
+        "pydantic"
+      ],
+      "classes": [
+        "Settings",
+        "Config"
+      ],
+      "functions": [],
+      "language": "python"
+    },
+    {
+      "path": "utils.py",
+      "hash": "e969292edf3d87e3",
+      "line_count": 17,
+      "code_lines": 13,
+      "imports": [
+        "functools",
+        "logging",
+        "time"
+      ],
+      "classes": [],
+      "functions": [
+        "timing_decorator",
+        "wrapper"
+      ],
+      "language": "python"
+    },
+    {
+      "path": "README.md",
+      "hash": "3953db9a633257f0",
+      "line_count": 26,
+      "code_lines": 15,
+      "imports": [],
+      "classes": [],
+      "functions": [],
+      "language": "python"
+    },
+    {
+      "path": "tests/test_main.py",
+      "hash": "d8f2ff9a5d567095",
+      "line_count": 27,
+      "code_lines": 18,
+      "imports": [
+        "pytest",
+        "fastapi.testclient",
+        "main"
+      ],
+      "classes": [],
+      "functions": [
+        "test_root",
+        "test_list_items",
+        "test_create_item"
+      ],
+      "language": "python"
+    }
+  ],
+  "code_snippets": [
+    {
+      "id": "8129735f_main.py_class_0",
+      "type": "class",
+      "content": "class Response(BaseModel):\n    success: bool\n    message: str\n    data: Optional[dict] = None\n\n# Domain models",
+      "source": "main.py",
+      "project_id": "8129735f",
+      "language": "python"
+    },
+    {
+      "id": "8129735f_main.py_class_1",
+      "type": "class",
+      "content": "class Item(BaseModel):\n    id: Optional[int]\n    name: str\n    description: Optional[str]\n    created_at: str\n\n\n# In-memory storage\nitems_db = {}\n\n# Endpoints\n@app.get(\"/\")\nasync def root():\n    return Response(success=True, message=\"API is running\", data={\"status\": \"healthy\"})\n\n\n@app.get(\"/items\", response_model=List[Item])\nasync def list_items():\n    return list(items_db.values())\n\n\n@app.get(\"/items/{item_id}\", response_model=Item)\nasync def get_item(item_id: int):\n    if item_id not in items_db:\n        raise HTTPException(status_code=404, detail=\"Build an ML inference serving platform with model versioning, A/B testing, canary deployments, request batching, GPU scheduling, auto-scaling, latency monitoring, and cost optimization. Support multiple model formats (ONNX, PyTorch, TensorFlow) and rate limiting per API key. not found\")\n    return items_db[item_id]\n\n\n@app.post(\"/items\", response_model=Item, status_code=201)\nasync def create_item(item: Item):\n    item_id = len(items_db) + 1\n    item.id = item_id\n    items_db[item_id] = item\n    return item\n\n\n@app.put(\"/items/{item_id}\", response_model=Item)\nasync def update_item(item_id: int, item: Item):\n    if item_id not in items_db:\n        raise HTTPException(status_code=404, detail=\"Build an ML inference serving platform with model versioning, A/B testing, canary deployments, request batching, GPU scheduling, auto-scaling, latency monitoring, and cost optimization. Support multiple model formats (ONNX, PyTorch, TensorFlow) and rate limiting per API key. not found\")\n    item.id = item_id\n    items_db[item_id] = item\n    return item\n\n\n@app.delete(\"/items/{item_id}\")\nasync def delete_item(item_id: int):\n    if item_id not in items_db:\n        raise HTTPException(status_code=404, detail=\"Build an ML inference serving platform with model versioning, A/B testing, canary deployments, request batching, GPU scheduling, auto-scaling, latency monitoring, and cost optimization. Support multiple model formats (ONNX, PyTorch, TensorFlow) and rate limiting per API key. not found\")\n    del items_db[item_id]\n    return Response(success=True, message=\"Build an ML inference serving platform with model versioning, A/B testing, canary deployments, request batching, GPU scheduling, auto-scaling, latency monitoring, and cost optimization. Support multiple model formats (ONNX, PyTorch, TensorFlow) and rate limiting per API key. deleted\")",
+      "source": "main.py",
+      "project_id": "8129735f",
+      "language": "python"
+    },
+    {
+      "id": "8129735f_models.py_class_0",
+      "type": "class",
+      "content": "class Item(BaseModel):\n    id: Optional[int]\n    name: str\n    description: Optional[str]\n    created_at: str",
+      "source": "models.py",
+      "project_id": "8129735f",
+      "language": "python"
+    },
+    {
+      "id": "8129735f_config.py_class_0",
+      "type": "class",
+      "content": "class Settings(BaseModel):\n    app_name: str = \"Auto-Generated API\"\n    debug: bool = True\n    database_url: Optional[str] = None\n\n    class Config:\n        env_file = \".env\"\n\nsettings = Settings()",
+      "source": "config.py",
+      "project_id": "8129735f",
+      "language": "python"
+    }
+  ],
+  "patterns": [
+    {
+      "pattern": "factory",
+      "confidence": "medium",
+      "source": "main.py",
+      "evidence": [
+        "create_"
+      ]
+    },
+    {
+      "pattern": "decorator",
+      "confidence": "medium",
+      "source": "main.py",
+      "evidence": [
+        "@"
+      ]
+    },
+    {
+      "pattern": "decorator",
+      "confidence": "high",
+      "source": "utils.py",
+      "evidence": [
+        "decorator",
+        "@",
+        "wrapper"
+      ]
+    },
+    {
+      "pattern": "factory",
+      "confidence": "medium",
+      "source": "tests/test_main.py",
+      "evidence": [
+        "create_"
+      ]
+    }
+  ],
+  "metrics": {
+    "total_files": 7,
+    "total_lines": 179,
+    "total_snippets": 4,
+    "total_patterns": 4
+  },
+  "results": {
+    "build_success": true,
+    "tests_passed": false,
+    "deployment_success": true
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "id": "8129735f_models.py_class_0",
+  "type": "class",
+  "content": "class Item(BaseModel):\n    id: Optional[int]\n    name: str\n    description: Optional[str]\n    created_at: str",
+  "source": "models.py",
+  "project_id": "8129735f",
+  "language": "python"
+}

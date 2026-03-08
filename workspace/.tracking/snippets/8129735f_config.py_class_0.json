@@ -1,0 +1,8 @@
+{
+  "id": "8129735f_config.py_class_0",
+  "type": "class",
+  "content": "class Settings(BaseModel):\n    app_name: str = \"Auto-Generated API\"\n    debug: bool = True\n    database_url: Optional[str] = None\n\n    class Config:\n        env_file = \".env\"\n\nsettings = Settings()",
+  "source": "config.py",
+  "project_id": "8129735f",
+  "language": "python"
+}

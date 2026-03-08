@@ -1,0 +1,133 @@
+{
+  "timestamp": "2026-03-07T19:49:33.518655",
+  "results": {
+    "total": 11,
+    "passed": 3,
+    "failed": 8,
+    "timeouts": 0,
+    "errors": 0,
+    "by_language": {
+      "python": {
+        "total": 5,
+        "passed": 0
+      },
+      "node": {
+        "total": 3,
+        "passed": 3
+      },
+      "bash": {
+        "total": 3,
+        "passed": 0
+      }
+    },
+    "details": [
+      {
+        "test": "python/hello_world",
+        "elapsed_ms": 7.901906967163086,
+        "runtime_ms": 3.8423538208007812,
+        "slot_id": 0,
+        "exit_code": -1,
+        "timed_out": false,
+        "status": "FAIL",
+        "reason": "[WinError 2] The system cannot find the file specified"
+      },
+      {
+        "test": "python/math_operations",
+        "elapsed_ms": 4.274129867553711,
+        "runtime_ms": 3.7314891815185547,
+        "slot_id": 1,
+        "exit_code": -1,
+        "timed_out": false,
+        "status": "FAIL",
+        "reason": "[WinError 2] The system cannot find the file specified"
+      },
+      {
+        "test": "python/list_comprehension",
+        "elapsed_ms": 4.006624221801758,
+        "runtime_ms": 3.4673213958740234,
+        "slot_id": 2,
+        "exit_code": -1,
+        "timed_out": false,
+        "status": "FAIL",
+        "reason": "[WinError 2] The system cannot find the file specified"
+      },
+      {
+        "test": "python/fibonacci",
+        "elapsed_ms": 3.107309341430664,
+        "runtime_ms": 2.5854110717773438,
+        "slot_id": 3,
+        "exit_code": -1,
+        "timed_out": false,
+        "status": "FAIL",
+        "reason": "[WinError 2] The system cannot find the file specified"
+      },
+      {
+        "test": "python/timeout_test",
+        "elapsed_ms": 2.9218196868896484,
+        "runtime_ms": 2.4073123931884766,
+        "slot_id": 4,
+        "exit_code": -1,
+        "timed_out": false,
+        "status": "FAIL",
+        "reason": "Expected timeout but execution completed"
+      },
+      {
+        "test": "node/hello_world",
+        "elapsed_ms": 105.62562942504883,
+        "runtime_ms": 104.94399070739746,
+        "slot_id": 5,
+        "exit_code": 0,
+        "timed_out": false,
+        "status": "PASS"
+      },
+      {
+        "test": "node/array_operations",
+        "elapsed_ms": 106.95743560791016,
+        "runtime_ms": 106.17542266845703,
+        "slot_id": 6,
+        "exit_code": 0,
+        "timed_out": false,
+        "status": "PASS"
+      },
+      {
+        "test": "node/promise_test",
+        "elapsed_ms": 144.66261863708496,
+        "runtime_ms": 144.0279483795166,
+        "slot_id": 7,
+        "exit_code": 0,
+        "timed_out": false,
+        "status": "PASS"
+      },
+      {
+        "test": "bash/hello_world",
+        "elapsed_ms": 190.1390552520752,
+        "runtime_ms": 189.59641456604004,
+        "slot_id": 8,
+        "exit_code": 127,
+        "timed_out": false,
+        "status": "FAIL",
+        "reason": "/bin/bash: tmptmpsandbox_slot_8srcexec_8_56c7172c.sh: No such file or directory\n"
+      },
+      {
+        "test": "bash/file_operations",
+        "elapsed_ms": 191.42675399780273,
+        "runtime_ms": 190.8421516418457,
+        "slot_id": 9,
+        "exit_code": 127,
+        "timed_out": false,
+        "status": "FAIL",
+        "reason": "/bin/bash: tmptmpsandbox_slot_9srcexec_9_a74f8017.sh: No such file or directory\n"
+      },
+      {
+        "test": "bash/loop_test",
+        "elapsed_ms": 185.99939346313477,
+        "runtime_ms": 185.38784980773926,
+        "slot_id": 10,
+        "exit_code": 127,
+        "timed_out": false,
+        "status": "FAIL",
+        "reason": "/bin/bash: tmptmpsandbox_slot_10srcexec_10_44c335e6.sh: No such file or directory\n"
+      }
+    ]
+  }
+}

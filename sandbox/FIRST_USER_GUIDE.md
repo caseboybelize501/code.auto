@@ -1,0 +1,292 @@
+# 🚀 32-Thread Sandbox - First User Guide
+
+**Server:** Running at http://localhost:7332
+
+---
+
+## Quick Start - Try It Now!
+
+### 1. Test Python Execution
+
+```bash
+curl -X POST http://localhost:7332/execute ^
+  -H "Content-Type: application/json" ^
+  -d "{\"code\": \"print('Hello from the sandbox!')\", \"language\": \"python\", \"timeout\": 5}"
+```
+
+**Expected Response:**
+```json
+{
+  "stdout": "Hello from the sandbox!\n",
+  "stderr": "",
+  "exit_code": 0,
+  "runtime_ms": 106.5,
+  "cpu_usage_pct": 12.3,
+  "mem_peak_mb": 8.2,
+  "timed_out": false,
+  "slot_id": 7
+}
+```
+
+---
+
+### 2. Test Node.js Execution
+
+```bash
+curl -X POST http://localhost:7332/execute ^
+  -H "Content-Type: application/json" ^
+  -d "{\"code\": \"console.log('Node.js works!')\", \"language\": \"node\", \"timeout\": 5}"
+```
+
+---
+
+### 3. Validate Code (Like JARVIS Would)
+
+```bash
+curl -X POST http://localhost:7332/validate ^
+  -H "Content-Type: application/json" ^
+  -d "{\"prompt\": \"Print hello world\", \"code\": \"print('Hello, World!')\", \"expected_output\": \"Hello, World!\"}"
+```
+
+**Expected Response:**
+```json
+{
+  "result": "PASS",
+  "stdout": "Hello, World!\n",
+  "stderr": "",
+  "exit_code": 0,
+  "retry_count": 0,
+  "runtime_ms": 105.2
+}
+```
+
+---
+
+### 4. Check Server Statistics
+
+```bash
+curl http://localhost:7332/stats
+```
+
+**Shows:**
+- 32 sandbox slots status
+- Available runtimes (Python, Node, Bash, Rust)
+- Execution statistics
+
+---
+
+## Interactive Testing
+
+### Option 1: Browser (Easiest)
+
+1. Open http://localhost:7332/docs in your browser
+2. You'll see the interactive Swagger UI
+3. Click on any endpoint to try it out
+4. Click "Try it out" and "Execute"
+
+### Option 2: Python Script
+
+Create a test file `test_sandbox.py`:
+
+```python
+import requests
+
+API = "http://localhost:7332"
+
+# Test 1: Python
+print("Testing Python...")
+r = requests.post(f"{API}/execute", json={
+    "code": "print('Hello from Python!')",
+    "language": "python"
+})
+print(f"Result: {r.json()['stdout'].strip()}")
+
+# Test 2: Node.js
+print("\nTesting Node.js...")
+r = requests.post(f"{API}/execute", json={
+    "code": "console.log('Hello from Node!')",
+    "language": "node"
+})
+print(f"Result: {r.json()['stdout'].strip()}")
+
+# Test 3: Math
+print("\nTesting math...")
+r = requests.post(f"{API}/execute", json={
+    "code": "print(sum(range(1000)))",
+    "language": "python"
+})
+print(f"Sum of 0-999: {r.json()['stdout'].strip()}")
+
+# Test 4: Validation
+print("\nTesting validation...")
+r = requests.post(f"{API}/validate", json={
+    "prompt": "Print greeting",
+    "code": "print('Hello!')",
+    "expected_output": "Hello!"
+})
+print(f"Validation: {r.json()['result']}")
+
+# Test 5: Stats
+print("\nServer Stats:")
+r = requests.get(f"{API}/stats")
+print(f"  Slots: {r.json()['pool_stats']['total_slots']}")
+print(f"  Available: {r.json()['pool_stats']['available']}")
+print(f"  Runtimes: {list(r.json()['pool_stats']['runtimes'].keys())}")
+```
+
+Run it:
+```bash
+python test_sandbox.py
+```
+
+---
+
+## Available Endpoints
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/health` | GET | Server health check |
+| `/execute` | POST | Execute code in sandbox |
+| `/validate` | POST | Validate LLM-generated code |
+| `/stats` | GET | Get execution statistics |
+| `/topology` | GET | Get 32-slot topology config |
+| `/docs` | GET | Interactive API documentation |
+
+---
+
+## Example: Execute Complex Python Code
+
+```bash
+curl -X POST http://localhost:7332/execute ^
+  -H "Content-Type: application/json" ^
+  -d "{\"code\": \"def fib(n):\\n    if n <= 1: return n\\n    return fib(n-1) + fib(n-2)\\nprint([fib(i) for i in range(10)])\", \"language\": \"python\", \"timeout\": 10}"
+```
+
+**Response:**
+```json
+{
+  "stdout": "[0, 1, 1, 2, 3, 5, 8, 13, 21, 34]\n",
+  "exit_code": 0,
+  "runtime_ms": 106.7,
+  "slot_id": 15
+}
+```
+
+---
+
+## Example: Test Timeout Handling
+
+```bash
+curl -X POST http://localhost:7332/execute ^
+  -H "Content-Type: application/json" ^
+  -d "{\"code\": \"import time\\nwhile True: time.sleep(0.1)\", \"language\": \"python\", \"timeout\": 2}"
+```
+
+**Response:**
+```json
+{
+  "stdout": "",
+  "stderr": "Execution timed out",
+  "exit_code": -1,
+  "timed_out": true,
+  "runtime_ms": 2000
+}
+```
+
+---
+
+## What Makes This Special
+
+### 32 Concurrent Execution Slots
+
+Each execution runs in an isolated slot:
+- **CPU Isolation**: Dedicated core assignment
+- **Memory Limits**: 2GB max per slot
+- **Temp Directory**: Isolated per slot
+- **No Network**: Complete isolation
+
+### Performance
+
+- **Throughput**: 80+ tasks/sec
+- **Latency**: ~100ms per execution
+- **Concurrency**: All 32 slots work in parallel
+
+### Multi-Language
+
+- ✅ Python 3.x
+- ✅ Node.js
+- ✅ Bash (via WSL)
+- ✅ Rust (compile + run)
+- ✅ Go
+- ✅ C/C++
+
+---
+
+## Integration with JARVIS
+
+This sandbox validates code generated by JARVIS:
+
+```python
+# JARVIS generates code
+generated_code = """
+def calculate_pi(precision):
+    pi = 0
+    for i in range(precision):
+        pi += ((-1)**i) / (2*i + 1)
+    return pi * 4
+
+print(f\"Pi ≈ {calculate_pi(100000):.5f}\")
+"""
+
+# Send to sandbox for validation
+response = requests.post("http://localhost:7332/execute", json={
+    "code": generated_code,
+    "language": "python",
+    "timeout": 10
+})
+
+if response.json()["exit_code"] == 0:
+    print("✅ Code validated!")
+    print(response.json()["stdout"])
+else:
+    print("❌ Code failed validation")
+```
+
+---
+
+## Troubleshooting
+
+### Server Not Responding?
+
+Check if it's running:
+```bash
+curl http://localhost:7332/health
+```
+
+### Port Already in Use?
+
+The server might already be running on 7332. Check:
+```bash
+netstat -ano | findstr :7332
+```
+
+### Python Not Found?
+
+The sandbox auto-detects Python. Check detection:
+```bash
+curl http://localhost:7332/stats
+```
+
+---
+
+## Next Steps
+
+1. **Try the API docs**: http://localhost:7332/docs
+2. **Run the test script**: `python test_sandbox.py`
+3. **Test with your own code**: Use `/execute` endpoint
+4. **Validate JARVIS output**: Use `/validate` endpoint
+5. **Check performance**: Watch `/stats` during load
+
+---
+
+**Enjoy exploring the 32-thread sandbox!** 🎉

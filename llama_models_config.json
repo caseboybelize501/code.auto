@@ -1,0 +1,115 @@
+{
+  "llama_cpp": {
+    "server": {
+      "host": "localhost",
+      "port": 8080,
+      "context_length": 8192
+    },
+    "models": {
+      "qwen2.5-coder-7b": {
+        "path": "D:\\models\\qwen2.5-coder-7b.gguf",
+        "type": "code",
+        "size": "7B",
+        "description": "Qwen2.5 Coder - 7B parameter code generation model"
+      },
+      "qwen3-coder-30b-q4": {
+        "path": "D:\\models\\qwen3-coder-30b-q4.gguf",
+        "type": "code",
+        "size": "30B",
+        "quantization": "Q4",
+        "description": "Qwen3 Coder - 30B quantized (Q4) for code generation"
+      },
+      "qwen3-coder-30b": {
+        "path": "D:\\models\\qwen3-coder-30b.gguf",
+        "type": "code",
+        "size": "30B",
+        "description": "Qwen3 Coder - 30B parameter code generation model"
+      },
+      "glm-4.7-flash": {
+        "path": "D:\\Users\\CASE\\models\\glm-4.7-flash.gguf",
+        "type": "general",
+        "size": "4.7B",
+        "description": "GLM-4.7 Flash - Fast general purpose model"
+      },
+      "nemotron-3-nano-30b": {
+        "path": "D:\\Users\\CASE\\models\\nemotron-3-nano-30b.gguf",
+        "type": "general",
+        "size": "30B",
+        "description": "Nemotron-3 Nano - 30B efficient model"
+      },
+      "qwen2.5-coder-32b": {
+        "path": "D:\\Users\\CASE\\models\\qwen2.5-coder-32b.gguf",
+        "type": "code",
+        "size": "32B",
+        "description": "Qwen2.5 Coder - 32B parameter code generation model"
+      },
+      "qwen3-coder-30b-user": {
+        "path": "D:\\Users\\CASE\\models\\qwen3-coder-30b.gguf",
+        "type": "code",
+        "size": "30B",
+        "description": "Qwen3 Coder - 30B (user models folder)"
+      },
+      "qwen3.5-27b": {
+        "path": "D:\\Users\\CASE\\models\\qwen3.5-27b.gguf",
+        "type": "code",
+        "size": "27B",
+        "description": "Qwen3.5 - 27B parameter model"
+      },
+      "qwen3.5-35b-a3b": {
+        "path": "D:\\Users\\CASE\\models\\qwen3.5-35b-a3b.gguf",
+        "type": "code",
+        "size": "35B",
+        "architecture": "A3B",
+        "description": "Qwen3.5 - 35B A3B architecture"
+      },
+      "qwen3.5-35b": {
+        "path": "D:\\Users\\CASE\\models\\qwen3.5-35b.gguf",
+        "type": "code",
+        "size": "35B",
+        "description": "Qwen3.5 - 35B parameter model"
+      },
+      "qwen3.5-9b": {
+        "path": "D:\\Users\\CASE\\models\\qwen3.5-9b.gguf",
+        "type": "code",
+        "size": "9B",
+        "description": "Qwen3.5 - 9B parameter model (lightweight)"
+      },
+      "mistral-small-24b-instruct": {
+        "path": "D:\\Users\\CASE\\AppData\\Roaming\\Block\\goose\\data\\models\\Mistral-Small-24B-Instruct-2501-Q4_K_M.gguf",
+        "type": "general",
+        "size": "24B",
+        "quantization": "Q4_K_M",
+        "description": "Mistral Small 24B Instruct - Q4 quantized"
+      },
+      "qwen3-coder-30b-a3b-instruct-q8": {
+        "path": "D:\\Users\\CASE\\AppData\\Roaming\\Block\\goose\\data\\models\\Qwen3-Coder-30B-A3B-Instruct-Q8_0.gguf",
+        "type": "code",
+        "size": "30B",
+        "quantization": "Q8_0",
+        "description": "Qwen3 Coder 30B A3B Instruct - Q8 quantized"
+      },
+      "mistral-7b-instruct-v0.2": {
+        "path": "D:\\AI\\models\\mistral-7b-instruct-v0.2.Q4_K_M.gguf",
+        "type": "general",
+        "size": "7B",
+        "quantization": "Q4_K_M",
+        "description": "Mistral 7B Instruct v0.2 - Q4 quantized"
+      },
+      "nomic-embed-text-v1.5": {
+        "path": "D:\\Users\\CASE\\.lmstudio\\.internal\\bundled-models\\nomic-ai\\nomic-embed-text-v1.5-GGUF\\nomic-embed-text-v1.5.Q4_K_M.gguf",
+        "type": "embedding",
+        "size": "N/A",
+        "quantization": "Q4_K_M",
+        "description": "Nomic Embed Text v1.5 - Embedding model"
+      }
+    },
+    "default_model": "qwen2.5-coder-7b",
+    "recommended_models": {
+      "code_generation": "qwen2.5-coder-7b",
+      "code_generation_large": "qwen3-coder-30b-q4",
+      "general_chat": "mistral-7b-instruct-v0.2",
+      "fast_response": "qwen3.5-9b",
+      "embedding": "nomic-embed-text-v1.5"
+    }
+  }
+}
